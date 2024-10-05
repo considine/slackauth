@@ -1,4 +1,4 @@
-module github.com/rusq/slackauth
+module github.com/considine/slackauth
 
 go 1.22
 
