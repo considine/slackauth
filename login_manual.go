@@ -45,7 +45,13 @@ func Browser(ctx context.Context, workspace string, opt ...Option) (string, []*h
 	if err != nil {
 		return "", nil, ErrBrowser{Err: err, FailedTo: "open page"}
 	}
-
+	// Set a custom User-Agent (Chrome 126.0.0.0)
+	err = page.SetUserAgent(&proto.NetworkSetUserAgentOverride{
+		UserAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+	})
+	if err != nil {
+		return "", nil, err
+	}
 	h := newHijacker(page, opts.lg)
 	defer h.Stop()
 
